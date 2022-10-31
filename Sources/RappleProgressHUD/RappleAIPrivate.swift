@@ -106,7 +106,11 @@ extension RappleActivityIndicatorView {
     
     /** get key window */
     @objc var keyWindow: UIWindow {
-        return UIApplication.shared.keyWindow!
+        if #available(iOS 13, *) {
+            return UIApplication.shared.windows.first { $0.isKeyWindow }!
+        } else {
+            return UIApplication.shared.keyWindow!
+        }
     }
 }
 
